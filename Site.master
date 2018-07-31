@@ -1,0 +1,138 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="CSS/Site.css" rel="stylesheet" />
+    <link href="CSS/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="CSS/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="Animation/animate.css" rel="stylesheet" />
+    <title>Movie</title>
+    <link href="JavaScript/jquery-ui.min.css" rel="stylesheet" />
+    <link href="JavaScript/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link href="JavaScript/jquery-ui.theme.min.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="nav-wrapper ">
+        <nav class="navbar navbar-inverse navbar-static-top navb animated slideInDown">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="Home.aspx">Movies</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="Home.aspx">Home</a></li>
+                <li><a href="AllMovies.aspx">All Movies</a></li>
+                <li><a href="topMovies.aspx">Top Movies</a></li>
+                <li><a href="myProfilePage.aspx">My Profile</a></li>
+                <li class="dropdown">
+                <button class="dropbtn">More Here <span class="caret"></span></button>
+                <div class="dropdown-content">
+                  <asp:Repeater ID="repGen" runat="server" OnItemDataBound="repGen_ItemDataBound">
+                      <ItemTemplate>
+                          <a href="Genre.aspx?Genre = <%#Eval("Name") %>"><%#Eval("Name") %></a>
+                      </ItemTemplate>
+                  </asp:Repeater>
+                </div>
+                </li>
+              </ul>
+                <%-- ------------Search Box------------------- --%>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#search">Search</a></li>
+                </ul>
+                <div id="search">
+                        
+    <button type="button" class="close">×</button>
+    <form>
+        <input type="search" value="" placeholder="Search" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+                <%-- ---------------Skype-------------- --%>
+                                       <div class="sky col-md-1"><script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
+<div id="SkypeButton_Call_Osama.Elayan93_1" style="float:Right;">
+ <script type="text/javascript">
+     Skype.ui({
+         "name": "dropdown",
+         "element": "SkypeButton_Call_Mohammed.Ghanim",
+         "participants": ["Mohammed.Ghanim"],
+         "imageColor": "white"
+     });
+ </script>
+</div></div>
+                <%-- --------------LogIn----------------- --%>
+
+                <h5 style="line-height:30px;float:right;color:#fff;">
+                    Hello
+                    <asp:Label ID="LogedName" runat="server" />
+                    <asp:LinkButton ID="lbLogout" runat="server" OnClick="lbLogout_Click" />
+                </h5>
+            </div>
+          </div>
+
+        </nav>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <br />
+        <%-- ------------------- Like & Share Button on facebook ----------------------- --%>
+       <div>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                   <div class="col-md-4" style="color:#fff"> &copy;2016 <span style="color:#808080">Entities Movie</span></div>
+                  <div class="col-md-2">
+                       <div class="fb-like" data-href="https://www.facebook.com/MovieMania-1764145823833771/?skip_nax_wizard=true" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                  </div>
+              </div>
+              </div>
+          </div>
+       </div>
+    </div>
+    </form>
+    <div id="fb-root"></div>
+
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <%-- jQuery --%>
+    <script src="JavaScript/jquery-1.12.3.min.js"></script>
+    <script src="JavaScript/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $('a[href="#search"]').on('click', function (event) {
+                event.preventDefault();
+                $('#search').addClass('open');
+                $('#search > form > input[type="search"]').focus();
+            });
+
+            $('#search, #search button.close').on('click keyup', function (event) {
+                if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                    $(this).removeClass('open');
+                }
+            });
+        });
+        $(document).ready(function () {
+            $(".menu").accordion({ collapsible: true, active: false });
+        });
+    </script>
+</body>
+</html>
